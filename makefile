@@ -1,3 +1,3 @@
-run-app:
+run-app-producer:
 	@echo "Running app..."
-	@go run cmd/main.go
+	@go run cmd/producer/producer.go

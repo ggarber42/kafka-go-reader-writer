@@ -12,6 +12,7 @@ type Config struct {
 	Brokers       string `mapstructure:"BROKERS"`
 	Group         string `mapstructure:"GROUP"`
 	GroupId       string `mapstructure:"GROUP_ID"`
+	ServerPort string `mapstructure:"SERVER_PORT"`
 }
 
 func LoadConfig(path string) (*Config, error) {
@@ -19,6 +20,7 @@ func LoadConfig(path string) (*Config, error) {
 	viper.SetConfigName("main_config")
 	viper.SetConfigFile(".env")
 	viper.AddConfigPath(path)
+	viper.AutomaticEnv()
 	err := viper.ReadInConfig()
 	if err != nil {
 		panic(fmt.Errorf("fatal error reading config file: %w", err))

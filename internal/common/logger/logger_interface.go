@@ -1,4 +1,4 @@
-package ilogger
+package logger
 
 type ILogger interface {
 	Info(msg string, info ...any)

@@ -26,9 +26,9 @@ func NewLogger() *Logger {
 }
 
 func (l *Logger) Info(msg string, info ...any) {
-	l.Logger.Info(msg, info)
+	l.Logger.Info(msg, info...)
 }
 
 func (l *Logger) Error(msg string, info ...any){
-	l.Logger.Error(msg, info)
+	l.Logger.Error(msg, info...)
 }
