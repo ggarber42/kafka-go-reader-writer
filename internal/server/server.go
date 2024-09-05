@@ -13,7 +13,7 @@ import (
 	"kafkago/internal/utils"
 )
 
-func Start(cfg *configs.Config, log logger.ILogger) {
+func Start(cfg *configs.Config, logger logger.ILogger) {
 	done := make(chan bool)
 
 	mux := http.NewServeMux()
@@ -26,19 +26,19 @@ func Start(cfg *configs.Config, log logger.ILogger) {
 
 	kclient, err := kafka.NewKafkaClient(cfg)
 	if err != nil {
-		log.Error(fmt.Sprintf("%w", err))
+		logger.Error(fmt.Sprintf("%w", err))
 		os.Exit(utils.EXIT_FAILURE)
 	}
 
 	go func() {
 
-		go make_controller.MakeKafkaProducerController(kclient, cfg)
-		log.Info(fmt.Sprintf("Start server at port 0.0.0.0:%s", cfg.ServerPort))
+		go make_controller.MakeKafkaProducerController(kclient, cfg, logger)
+		logger.Info(fmt.Sprintf("Start server at port 0.0.0.0:%s", cfg.ServerPort))
 		err = server.ListenAndServe()
 		if errors.Is(err, http.ErrServerClosed) {
 			fmt.Println("server closed")
 		} else {
-			log.Error(fmt.Sprintf("Error starting server: %s", err.Error()))
+			logger.Error(fmt.Sprintf("Error starting server: %s", err.Error()))
 			os.Exit(utils.EXIT_FAILURE)
 		}
 
@@ -47,5 +47,5 @@ func Start(cfg *configs.Config, log logger.ILogger) {
 
 	<-done
 
-	log.Info("server finish")
+	logger.Info("server finish")
 }

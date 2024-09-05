@@ -2,17 +2,21 @@ package output
 
 import (
 	"fmt"
+	"kafkago/configs"
+	"kafkago/internal/common/logger"
 	kafka_producer "kafkago/internal/kafka/producer"
-	"kafkago/internal/utils"
-	"os"
 )
 
-func KafkaProducerController(kProducer *kafka_producer.KafkaProducer) {
-	for char := 'A'; char <= 'Z'; char++ {
-		err := kProducer.Produce("aaaa", fmt.Sprintf("%c", char))
+func KafkaProducerController(kProducer *kafka_producer.KafkaProducer, cfg *configs.Config, logger logger.ILogger) {
+	count := 1
+	for {
+		key := fmt.Sprintf("%s:%d", "chave", count)
+		err := kProducer.Produce(cfg.ProducerTopic, "messagem", key)
 		if err != nil {
-			fmt.Println("corram para as montanhas", err)
-			os.Exit(utils.EXIT_FAILURE)
+			logger.Error(fmt.Sprintf("erro writing to kafka topic: %w", err))
+		} else {
+			logger.Info(fmt.Sprintf("processed message %d", count))
 		}
+		count ++
 	}
 }
