@@ -11,11 +11,11 @@ func KafkaProducerController(kProducer *kafka_producer.KafkaProducer, cfg *confi
 	count := 1
 	for {
 		key := fmt.Sprintf("%s:%d", "chave", count)
-		err := kProducer.Produce(cfg.ProducerTopic, "messagem", key)
+		err := kProducer.Produce(cfg.Topic_1, "messagem", key)
 		if err != nil {
 			logger.Error(fmt.Sprintf("erro writing to kafka topic: %w", err))
 		} else {
-			logger.Info(fmt.Sprintf("processed message %d", count))
+			logger.Info(fmt.Sprintf("produced message %d", count))
 		}
 		count ++
 	}

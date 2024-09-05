@@ -15,6 +15,7 @@ func NewKafkaClient(cfg *configs.Config) (*kgo.Client, error) {
 	client, err := kgo.NewClient(
 		kgo.SeedBrokers(strings.Split(cfg.Brokers, ",")...),
 		kgo.ConsumerGroup(cfg.Group),
+		kgo.ConsumeTopics(cfg.Topic_1),
 		kgo.InstanceID(cfg.GroupId+instanceID.String()),
 		kgo.FetchMaxWait(500*time.Millisecond),
 		kgo.MaxBufferedRecords(100),

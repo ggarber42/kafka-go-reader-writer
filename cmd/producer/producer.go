@@ -15,5 +15,5 @@ func main() {
 		panic(fmt.Errorf("fatal error reading config file: %w", err))
 	}
 	log.Info("start application")
-	server.Start(cfg, log)
+	server.StartProducerServer(cfg, log)
 }

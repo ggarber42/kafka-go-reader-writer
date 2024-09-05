@@ -7,12 +7,12 @@ import (
 )
 
 type Config struct {
-	ProducerTopic string `mapstructure:"PRODUCER_TOPIC"`
-	ConsumerTopic string `mapstructure:"CONSUMER_TOPIC"`
+	Topic_1 string `mapstructure:"TOPIC_1"`
 	Brokers       string `mapstructure:"BROKERS"`
 	Group         string `mapstructure:"GROUP"`
 	GroupId       string `mapstructure:"GROUP_ID"`
-	ServerPort string `mapstructure:"SERVER_PORT"`
+	ProducerServerPort string `mapstructure:"PRODUCER_SERVER_PORT"`
+	ConsumerServerPort string `mapstructure:"CONSUMER_SERVER_PORT"`
 }
 
 func LoadConfig(path string) (*Config, error) {

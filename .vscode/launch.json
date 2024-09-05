@@ -10,7 +10,7 @@
         "request": "launch",
         "mode": "debug",
         "envFile": "${workspaceFolder}/.env",
-        "program": "${workspaceFolder}/cmd/producer/producer.go",
+        "program": "${workspaceFolder}/cmd/consumer/consumer.go",
         "cwd": "${workspaceFolder}",
       }
     ]
